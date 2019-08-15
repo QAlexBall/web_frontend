@@ -7,17 +7,24 @@ export function* helloSaga () {
 }
 
 export function* click_button () {
-  yield console.log('Hello saga!')
-  yield console.log('hello again')
+  console.log('wait 1s click button')
+  yield delay(1000)
+  yield put({type: 'TEST'})
+}
+
+export function* watch_click_button() {
+  console.log('watch click button')
+  yield takeEvery('TEST_ASYNC', click_button)
 }
 
 export function* incrementAsync() {
+  console.log('increment async')
   yield delay(1000)
   yield put({ type: 'TEST' })
 }
 
 export function* watchIncrementAsync() {
-  yield takeEvery('IINCREMENT_ASYNC', incrementAsync)
+  yield takeEvery('INCREMENT_ASYNC', incrementAsync)
 }
 
 function fetchTest () {
@@ -30,7 +37,7 @@ function fetchTest () {
 export default function* rootSaga() {
   yield all([
     helloSaga(),
-    click_button(),
+    watch_click_button(),
     watchIncrementAsync()
   ])
 }

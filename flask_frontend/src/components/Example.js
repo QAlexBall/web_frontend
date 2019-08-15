@@ -2,25 +2,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
+import { click_button } from '../reducers/test'
 
-// export function Example(props) {
-  // const [count, setCount] = useState(0);
-//
-  // return (
-    // <div>
-      // <p> You clicked {count} times </p>
-      // <button onClick={() => setCount(count + 1)}>
-        // Click me
-      // </button>
-      // <button onClick={ this.props.click_button.bind(this) }>
-        // Click with dispatch
-      // </button>
-//
-    // </div>
-  // )
-// }
-
-export class Example extends Component {
+class Example extends Component {
   static propTypes = {
     count: PropTypes.any,
   }
@@ -32,6 +16,9 @@ export class Example extends Component {
         <button onClick={ this.props.click_button }>
           Click with dispatch
         </button>
+        <button onClick={ this.props.click_button_async }>
+          Click with async saga
+        </button>
       </div>
     )
   }
@@ -39,14 +26,17 @@ export class Example extends Component {
 
 const mapStateToProps = (state) => {
   return {
+    count: state.test.count
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
     click_button: () => {
-      console.log('mapDispatch')
-      dispatch({ type: 'TEST' })
+      dispatch(click_button())
+    },
+    click_button_async: () => {
+      dispatch({type: 'TEST_ASYNC'})
     }
   }
 }
