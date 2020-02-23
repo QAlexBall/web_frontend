@@ -5,9 +5,6 @@ import PropTypes from 'prop-types'
 import { click_button } from '../reducers/test'
 
 class Example extends Component {
-  static propTypes = {
-    count: PropTypes.any,
-  }
 
   render() {
     return (

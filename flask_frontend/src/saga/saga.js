@@ -8,7 +8,9 @@ export function* helloSaga () {
 
 export function* click_button () {
   console.log('wait 1s click button')
-  yield delay(1000)
+  let result = fetchTest()
+  console.log(result)
+  yield delay(2000)
   yield put({type: 'TEST'})
 }
 
@@ -28,8 +30,9 @@ export function* watchIncrementAsync() {
 }
 
 function fetchTest () {
+  console.log('fetchTest')
   return axios.get(
-    'http://127.0.0.1:8000/jianshu/test'
+    'http://127.0.0.1:5000/test_json'
   )
 }
 

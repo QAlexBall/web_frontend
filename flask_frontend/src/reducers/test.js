@@ -11,18 +11,14 @@ export default function (state, action) {
 
   switch (action.type) {
     case TEST:
-      console.log('=> after 1s reducer action Test')
-      return state.count + 1
+      return {count: state.count + 1}
     case TEST_ASYNC:
-      console.log('=> effect')
-      console.log(state)
-      return state
+      return {count: 0}
     default:
       return state
   }
 }
 
 export const click_button = () => {
-  console.log('click button in reducer')
   return { type: TEST }
 }
